@@ -23,14 +23,6 @@ def howMuchWePay(remainingRolls, faceNumber, rollCost = 0):
             result = np.mean(range(1,faceNumber+1))
 
     else:   
-        if rollCost == 0: #Easier and cleaner logic to separate into two scenarios of rollCost
-            probReroll = int(howMuchWePay(remainingRolls-1, faceNumber, rollCost))/faceNumber
-            notRerolledOutcomes = range(int(howMuchWePay(remainingRolls-1, faceNumber, rollCost)) + 1, faceNumber+1)
-            currExpectationAssumingNoReroll = np.mean(notRerolledOutcomes)
-            result = \
-                probReroll * howMuchWePay(remainingRolls-1, faceNumber, rollCost) + \
-                (1 - probReroll) * currExpectationAssumingNoReroll
-        else:
             payOffArray = range(1, faceNumber+1) - np.full((faceNumber), rollCost)
             EV = howMuchWePay(remainingRolls-1, faceNumber, rollCost)
             payOffArray[payOffArray < EV] = 0
